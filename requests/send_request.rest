@@ -1,0 +1,4 @@
+DELETE  http://localhost:3040/api/notes
+
+Content-Type: application/json
+
