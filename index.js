@@ -64,7 +64,9 @@ app.post("/api/notes", (req, res) => {
 });
 
 //updating the notes. toggling importance
-app.put('/notes/api/notes:id', (req, res, next) => {
+//NB the note object is what conatins the changes.
+//the {new:true} means that we get the new changed result 
+app.put('/api/notes:id', (req, res, next) => {
   const body = req.body;
 
   const note = {
@@ -73,7 +75,7 @@ app.put('/notes/api/notes:id', (req, res, next) => {
   }
 
   const id = req.params.id;
-  Note.findByIdAndUpdate(id, {new: true} )
+  Note.findByIdAndUpdate(id, note, {new: true} )
       .then(updated_note => {
         res.json(updated_note);
       })
