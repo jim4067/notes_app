@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.set('useFindAndModify', false)
+mongoose.set('useFindAndModify', false);
 
 const url = process.env.MONGODB_URI;
 
@@ -15,8 +15,15 @@ mongoose.connect(url, {useNewUrlParser:true, useUnifiedTopology:true} )
         }) 
 
 const note_schema = new mongoose.Schema({
-    content: String,
-    date: Date,
+    content: { 
+        type: String,
+        minlength: 5,
+        required: true
+    },
+    date: {
+        type: Date,
+        required: true
+    },
     important: Boolean
 } );
 
@@ -28,6 +35,7 @@ note_schema.set( 'toJSON', {
     }
 });
 
+//this makes sure that the schema is registered with mongoose
 const Note = mongoose.model('Note', note_schema);
 
 module.exports = Note;
