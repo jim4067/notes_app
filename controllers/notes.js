@@ -65,7 +65,7 @@ note_router.delete('/:id', (req, res, next) => {
 
     Note.findByIdAndDelete(id)
         .then(() => {
-            return res.status(404).end();
+            return res.status(204).end();
         })
         .catch((err) => {
             next(err);
