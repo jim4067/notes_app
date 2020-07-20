@@ -6,23 +6,18 @@ note_router.get('/', async (req, res) => {
     res.json(notes);
 });
 
-note_router.get('/:id', async (req, res, next) => {
+note_router.get('/:id', async (req, res) => {
     const id = req.params.id;
 
-    try {
-        const note = await Note.findById(id);
-        if (note) {
-            res.json(note);
-        } else {
-            res.status(404).end();
-        }
-
-    } catch (exception) {
-        next(exception);
+    const note = await Note.findById(id);
+    if (note) {
+        res.json(note);
+    } else {
+        res.status(404).end();
     }
 });
 
-note_router.post('/', async (req, res, next) => {
+note_router.post('/', async (req, res) => {
     const body = req.body;
     const note = new Note({
         content: body.content,
@@ -30,16 +25,12 @@ note_router.post('/', async (req, res, next) => {
         important: body.important
     });
 
-    try {
-        const saved_note = await note.save();
-        res.json(saved_note);
+    const saved_note = await note.save();
+    res.json(saved_note);
 
-    } catch (exception) {
-        next(exception);
-    }
 });
 
-note_router.put('/:id', (req, res, next) => {
+note_router.put('/:id', async (req, res) => {
     const body = req.body;
     const id = req.params.id;
 
@@ -48,23 +39,15 @@ note_router.put('/:id', (req, res, next) => {
         important: body.important,
     }
 
-    try {
-        const updated_note = await Note.findByIdAndUpdate(id, note, { new: true })
-        res.json(updated_note)
-    } catch (exception) {
-        next(exception);
-    }
+    const updated_note = await Note.findByIdAndUpdate(id, note, { new: true })
+    res.json(updated_note);
 });
 
-note_router.delete('/:id', async (req, res, next) => {
+note_router.delete('/:id', async (req, res) => {
     const id = req.params.id;
 
-    try {
-        await Note.findByIdAndDelete(id);
-        res.json(204).end()
-    } catch (exception) {
-        next(exception);
-    }
+    await Note.findByIdAndDelete(id);
+    res.json(204).end();
 });
 
 module.exports = note_router;
