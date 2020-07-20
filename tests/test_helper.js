@@ -22,7 +22,7 @@ const non_existent_id = async () => {
 }
 
 const notes_in_db = async () => {
-    const notes = await notes.find({});
+    const notes = await Note.find({});
     return notes.map(note_param => note_param.toJSON)
 }
 
