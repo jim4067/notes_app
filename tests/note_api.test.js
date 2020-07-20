@@ -49,6 +49,41 @@ test("a specific note is within the returned notes", async () => {
     expect(contents).toContain("Browser can execute only javascript");
 })
 
+//testing whether a note can be aded after refactoring
+test("a new note can be added ", async( ) => {
+    const new_note = {
+        content: "async/await simplifies making async calls",
+        date: new Date(),
+        important: false
+    };
+
+    await api
+             .post('/api/notes')
+             .send(new_note)
+             .expect(200)
+             .expect('Content-Type', /application\/json/);
+    const response = await api.get('/api/notes');
+
+    const contents = response.body.map( res => res.content);
+
+    expect(response.body).toHaveLength(initial_notes.length + 1);
+    expect(contents).toContain("async/await simplifies making async calls");
+});
+
+//making sure that a note without content cannot be added
+test("a note without content", async() => {
+    const no_content = {
+        important: true
+    };
+    await api.post('/api/notes')
+             .send(no_content)
+             .expect(404)
+             .expect('Content-Type', /application\/json/);
+
+    const response = await api.get('/api/note');
+    expect(response).toHaveLength(initial_notes.length);
+});
+
 afterAll(() => {
     mongoose.connection.close();
 });
