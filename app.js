@@ -5,6 +5,7 @@ const logger = require('./utils/logger')
 const note_router = require('./controllers/notes');
 const middleware = require('./utils/middleware')
 const mongoose = require('mongoose');
+require('express-async-errors');
 
 const app = express();
 
