@@ -1,42 +1,42 @@
 const note_router = require('express').Router();
 const Note = require('../models/note');
 
-note_router.get('/' , async (req, res) => {
+note_router.get('/', async (req, res) => {
     const notes = await Note.find({});
     res.json(notes);
 });
 
 note_router.get('/:id', async (req, res, next) => {
-    try{
     const id = req.params.id;
-    const note = await Note.findById(id);
-    if (note) {
-        res.json(note);
-    } else {
-        res.status(404).end();
-    }
 
-    } catch(err){
-        next(err)
+    try {
+        const note = await Note.findById(id);
+        if (note) {
+            res.json(note);
+        } else {
+            res.status(404).end();
+        }
+
+    } catch (exception) {
+        next(exception);
     }
 });
 
-note_router.post('/', (req, res, next) => {
+note_router.post('/', async (req, res, next) => {
     const body = req.body;
-
     const note = new Note({
         content: body.content,
-        important: body.important,
-        date: body.date
+        date: body.date,
+        important: body.important
     });
 
-    note.save()
-        .then((saved_note) => {
-            res.json(saved_note)
-        })
-        .catch((err) => {
-            next(err);
-        })
+    try {
+        const saved_note = await note.save();
+        res.json(saved_note);
+
+    } catch (exception) {
+        next(exception);
+    }
 });
 
 note_router.put('/:id', (req, res, next) => {
@@ -48,25 +48,23 @@ note_router.put('/:id', (req, res, next) => {
         important: body.important,
     }
 
-    Note.findByIdAndUpdate(id, note, { new: true })
-        .then((updated_note) => {
-            res.json(updated_note)
-        })
-        .catch((err) => {
-            next(err);
-        })
+    try {
+        const updated_note = await Note.findByIdAndUpdate(id, note, { new: true })
+        res.json(updated_note)
+    } catch (exception) {
+        next(exception);
+    }
 });
 
-note_router.delete('/:id', (req, res, next) => {
+note_router.delete('/:id', async (req, res, next) => {
     const id = req.params.id;
 
-    Note.findByIdAndDelete(id)
-        .then(() => {
-            return res.status(204).end();
-        })
-        .catch((err) => {
-            next(err);
-        })
+    try {
+        await Note.findByIdAndDelete(id);
+        res.json(204).end()
+    } catch (exception) {
+        next(exception);
+    }
 });
 
 module.exports = note_router;
