@@ -6,11 +6,11 @@ const note_schema = new mongoose.Schema({
     content: {
         type: String,
         minlength: 5,
-        required: true
+        required: false
     },
     date: {
         type: Date,
-        required: true
+        required: false
     },
     important: Boolean
 } );
