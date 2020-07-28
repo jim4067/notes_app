@@ -82,11 +82,12 @@ describe("addition of a new note", () => {
         });
 
         await note_object.save();
-
         const notes_at_end = await helper.notes_in_db();
+
         expect(notes_at_end).toHaveLength(helper.initial_notes.length + 1);
 
         const contents = notes_at_end.map(items => items.content);
+
         expect(contents[contents.length-1]).toContain("async await simplifies making async calls")
     });
 
@@ -105,6 +106,24 @@ describe("addition of a new note", () => {
     });
 });
 */
+describe("deletion of a note", () => {
+    test("succeeds with status 204 if id is valid", async () => {
+        const notes_at_start = await helper.notes_in_db();
+        const note_to_delete = notes_at_start[0];
+
+        await api
+            .delete(`/api/notes/${note_to_delete}.id`)
+            .expect(204);
+
+        const notes_at_end = await helper.notes_in_db()
+
+        expect(notes_at_end).toHaveLength(helper.initial_notes.length - 1);
+
+        const contents = notes_at_end.map(items => items.content);
+
+        expect(contents).not.toContain(note_to_delete.content);
+    });
+});
 
 afterAll(() => {
     mongoose.connection.close();
