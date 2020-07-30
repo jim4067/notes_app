@@ -1,11 +1,12 @@
 const config = require('./utils/config');
 const cors = require('cors');
 const express = require('express');
-const logger = require('./utils/logger')
-const note_router = require('./controllers/notes');
-const middleware = require('./utils/middleware')
 const mongoose = require('mongoose');
 require('express-async-errors');
+const logger = require('./utils/logger')
+const note_router = require('./controllers/notes');
+const middleware = require('./utils/middleware');
+const user_router = require('./controllers/users');
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use(express.static('build'));
 app.use(express.json());
 
 app.use('/api/notes', note_router);
+app.use('/api/users', user_router);
 
 app.use(middleware.request_logger)
 app.use(middleware.unknown_endpoint);
