@@ -9,13 +9,17 @@ const note_schema = new mongoose.Schema({
         required: true
     },
     date: {
-        type: Date,
-        required: false
+        required: false,
+        type: Date
     },
-    important: Boolean
-} );
+    important: Boolean,
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }
+});
 
-note_schema.set( 'toJSON', {
+note_schema.set('toJSON', {
     transform: (document, return_object) => {
         return_object.id = return_object._id.toString();
         delete return_object._id;
