@@ -23,11 +23,11 @@ describe("when initially there is one user in the database", () => {
     test("creation succeds with a fresh username", async () => {
         const users_at_start = await helper.users_in_db();
 
-        const new_user = new User({
+        const new_user = {
             username : "jim_4067",
             name : "James Mutuku",
             password : "pass123"
-        });
+        };
 
         await api
                  .post('/api/users')
@@ -40,6 +40,27 @@ describe("when initially there is one user in the database", () => {
 
         const usernames = users_at_end.map(u_param => u_param.username);
         expect(usernames).toContain(new_user.username);
+    });
+
+    test("creation fails with proper statuscode and message if username is already taken" , async () => {
+        const users_at_start = helper.users_in_db();
+
+        const new_user = {
+            username : "root",
+            name : "superuser",
+            password : "pass123"
+        };
+
+        const result = await api
+                 .post('/api/users')
+                 .send(new_user)
+                 .expect(400)
+                 .expect('Content-Type', /application\/json/);
+
+        expect(result.body.error).toContain('`username` to be unique');
+
+        const users_at_end = await helper.users_in_db();
+        expect(users_at_end).toHaveLength(users_at_start.length);
     });
 });
 
