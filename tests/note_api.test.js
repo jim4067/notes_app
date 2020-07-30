@@ -106,6 +106,8 @@ describe("addition of a new note", () => {
     });
 });
 */
+
+/*
 describe("deletion of a note", () => {
     test("succeeds with status 204 if id is valid", async () => {
         const notes_at_start = await helper.notes_in_db();
@@ -124,7 +126,7 @@ describe("deletion of a note", () => {
         expect(contents).not.toContain(note_to_delete.content);
     });
 });
-
+*/
 afterAll(() => {
     mongoose.connection.close();
 });
