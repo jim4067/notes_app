@@ -1,5 +1,6 @@
 const note_router = require('express').Router();
 const Note = require('../models/note');
+const User = require('../models/user');
 
 note_router.get('/', async (req, res) => {
     const notes = await Note.find({});
@@ -19,15 +20,21 @@ note_router.get('/:id', async (req, res) => {
 
 note_router.post('/', async (req, res) => {
     const body = req.body;
+
+    const user = await User.findById(body.user_id);
+
     const note = new Note({
         content: body.content,
         date: body.date,
-        important: body.important
+        important: body.important === "undefined" ? false : body.important,
+        user: user._id
     });
 
     const saved_note = await note.save();
-    res.json(saved_note);
+    user.notes = user.notes.concat(saved_note._id);
+    await user.save();
 
+    res.json(saved_note);
 });
 
 note_router.put('/:id', async (req, res) => {
