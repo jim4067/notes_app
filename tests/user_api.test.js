@@ -47,7 +47,7 @@ describe("when initially there is one user in the database", () => {
     });
 
     test("creation fails with proper statuscode and message if username is already taken", async () => {
-        const users_at_start = helper.users_in_db();
+        //const users_at_start = await helper.users_in_db();
 
         const new_user = {
             username: "root",
@@ -64,7 +64,7 @@ describe("when initially there is one user in the database", () => {
         expect(result.body.error).toContain('`username` to be unique');
 
         //const users_at_end = await helper.users_in_db();
-        //expect(users_at_end).toHaveLength(users_at_start.length);
+        //expect(users_at_end.length).toHaveLength(users_at_start.length);
     });
 
 });
