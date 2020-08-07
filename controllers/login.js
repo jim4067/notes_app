@@ -16,4 +16,15 @@ login_router.post('/', async (req, res) => {
             error : "invalid username or password"
         });
     }
+
+    const user_for_token = {
+        username : user.username,
+        id : user._id,
+    }
+
+    const token = jwt.sign(user_for_token, process.env.SECRET);
+
+    res
+    .status(200)
+    .send({token, username: user.username, name: user.name})
 });
