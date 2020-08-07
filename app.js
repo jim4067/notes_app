@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 require('express-async-errors');
 const logger = require('./utils/logger')
 const note_router = require('./controllers/notes');
+const login_router = require('./controllers/login');
 const middleware = require('./utils/middleware');
 const user_router = require('./controllers/users');
 
@@ -25,6 +26,7 @@ app.use(cors());
 app.use(express.static('build'));
 app.use(express.json());
 
+app.use('/api/login', login_router);
 app.use('/api/notes', note_router);
 app.use('/api/users', user_router);
 
