@@ -19,7 +19,7 @@ user_router.post('/', async (req, res) => {
     const user = new User({
         username: body.username,
         name: body.name,
-        password_hash
+        password : password_hash
     });
 
     const saved_user = await user.save();

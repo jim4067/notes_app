@@ -11,7 +11,7 @@ const user_schema = new mongoose.Schema({
         unique : true
     },
     name: String,
-    password_hash: String,
+    password: String,
     notes: [
         {
             type: mongoose.Schema.Types.ObjectId,
