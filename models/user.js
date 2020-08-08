@@ -11,7 +11,7 @@ const user_schema = new mongoose.Schema({
         unique : true
     },
     name: String,
-    password_hash: String,
+    password_hash: String,                                      //look at this incase of errors
     notes: [
         {
             type: mongoose.Schema.Types.ObjectId,
@@ -28,7 +28,7 @@ user_schema.set('toJSON', {
         delete returned_object._id;
         delete returned_object.__v;
         //the password_hash should not be returned
-        delete returned_object.password;
+        delete returned_object.password_hash;           //look at this incase of errors
     }
 });
 
