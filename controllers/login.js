@@ -7,13 +7,19 @@ login_router.post('/', async (req, res) => {
     const body = req.body;
 
     const user = await User.findOne({ username: body.username });
+
+    //user not found
+    if(!user){
+        return res.status(401).json({error : "user does not exist" });
+    }
+
     const password_correct = user === null
         ? false
-        : await bcrypt.compare(body.password, user.password_hash);
+        : await bcrypt.compare(body.password, user.password_hash);      //incase of emergrncies start here
 
-    if (!(user && password_correct)){
+    if (!password_correct){
         return res.status(401).json({
-            error : "invalid username or password"
+            error : "invalid password"
         });
     }
 
