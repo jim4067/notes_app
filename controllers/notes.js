@@ -22,8 +22,8 @@ note_router.get('/:id', async (req, res) => {
     }
 });
 
-const get_token_from = (request) => {
-    const authorization = request.get('authorization');
+const get_token_from = (req) => {
+    const authorization = req.get('authorization');
     if(authorization && authorization.toLowerCase().startsWith('bearer ')){
         return authorization.substring(7);
     }
@@ -32,6 +32,12 @@ const get_token_from = (request) => {
 
 note_router.post('/', async (req, res) => {
     const body = req.body;
+
+    const token = get_token_from(req);
+    const decoded_token = jwt.verify(token, process.env.SECRET);
+    if(!token || decoded_token.id){
+        return res.status(401).json({erro : "token missing or invalid"})
+    }
 
     const user = await User.findById(body.user_id);
 
