@@ -36,7 +36,7 @@ note_router.post('/', async (req, res) => {
     const token = get_token_from(req);
     const decoded_token = jwt.verify(token, process.env.SECRET);
     if(!token || decoded_token.id){
-        return res.status(401).json({erro : "token missing or invalid"})
+        return res.status(401).json({error : "token missing or invalid"})
     }
 
     const user = await User.findById(body.user_id);
