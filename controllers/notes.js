@@ -22,6 +22,14 @@ note_router.get('/:id', async (req, res) => {
     }
 });
 
+const get_token_from = (request) => {
+    const authorization = request.get('authorization');
+    if(authorization && authorization.toLowerCase().startsWith('bearer ')){
+        return authorization.substring(7);
+    }
+    return null;
+}
+
 note_router.post('/', async (req, res) => {
     const body = req.body;
 
