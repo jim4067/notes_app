@@ -14,7 +14,7 @@ user_router.post('/', async (req, res) => {
     const body = req.body;
 
     const salt_rounds = 10;
-    const password_hash = await bcrypt.hash(body.password, salt_rounds);
+    const password_hash = await bcrypt.hash(body.password, salt_rounds);//change password to password_hash incase of errors
 
     const user = new User({
         username: body.username,
