@@ -14,12 +14,12 @@ user_router.post('/', async (req, res) => {
     const body = req.body;
 
     const salt_rounds = 10;
-    const password_hash = await bcrypt.hash(body.password_hash, salt_rounds);
+    const password_hash = await bcrypt.hash(body.password, salt_rounds);
 
     const user = new User({
         username: body.username,
         name: body.name,
-        password : password_hash
+        password_hash
     });
 
     const saved_user = await user.save();
