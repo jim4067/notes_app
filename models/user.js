@@ -37,3 +37,4 @@ const User = mongoose.model('User', user_schema);
 module.exports = User;
 
 //the password_hash is stored in the database and not the actual password
+//never store passwords as plain text in the database
