@@ -1,5 +1,7 @@
 const logger = require('./logger');
 
+//commented out the requesst logger because it does no one justice
+/*
 const request_logger = (req, res, next) => {
     logger.info('Method', req.method)
     logger.info('Path', req.path)
@@ -7,7 +9,7 @@ const request_logger = (req, res, next) => {
     logger.info('----')
     next()
 }
-
+*/
 const unknown_endpoint = (req, res) => {
     res.status(404).send({ error: "unknown endpoint" });
 }
@@ -34,7 +36,6 @@ const error_handler = (error, req, res, next) => {
 }
 
 module.exports = {
-    request_logger,
     unknown_endpoint,
     error_handler
 }
