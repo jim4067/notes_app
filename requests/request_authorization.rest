@@ -1,0 +1,8 @@
+POST http://localhost:3040/api/notes
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImppbV80MDY3IiwiaWQiOiI1ZjIzZTc2Y2I3NmNjNjcwMzViOGFkMjIiLCJpYXQiOjE1OTcwNDkzMTh9.e_rbxqkKcXCUi2Ms9qpbTmN__vk_9iilbt_VIT1JPL4
+
+{
+    "content" : "C++. Gods favorite language",
+    "important" : false
+}
