@@ -36,8 +36,8 @@ note_router.post('/', async (req, res) => {
     const token = get_token_from(req);
     const decoded_token = jwt.verify(token, process.env.SECRET);
 
-    console.log("here is the token", token);                                    //debugging.
-    console.log("and here is the decoded token", decoded_token)                //debugging.
+   // console.log("here is the token", token);                                    //debugging.
+   // console.log("and here is the decoded token", decoded_token)                //debugging.
 
     if(!token || !decoded_token.id){
         return res.status(401).json({error : "token missing or invalid"})
