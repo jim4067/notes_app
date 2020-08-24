@@ -33,6 +33,11 @@ app.use('/api/login', login_router);
 app.use('/api/notes', note_router);
 app.use('/api/users', user_router);
 
+if(process.env.NODE_ENV === 'test') {
+    const testing_router = require('./controllers/testing');
+    app.use('api/testing', testing_router)
+}
+
 //app.use(middleware.request_logger)
 app.use(middleware.unknown_endpoint);
 app.use(middleware.error_handler);
