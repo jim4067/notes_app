@@ -32,6 +32,17 @@ The notes app is from the [fullstackopen] course that is offered by the Univesit
 
 This app is not oftenly deployed to production so here are the instruction for running it locally.
 
+- Make sure you have git and node and is familiar with the basics of how both of them work.
+- clone this repository.
+- change directory into the notes app.
+- install all the required dependancies.
+- run the npm script that starts the server locally.
+
+                    git clone https://github.com/jim4067/notes_app_frontend.git
+                    cd notes_app_front_end
+                    npm i
+                    npm run dev
+
 <br />
 <br />
 
