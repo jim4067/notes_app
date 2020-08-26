@@ -45,7 +45,7 @@ This app is not oftenly deployed to production so here are the instruction for r
 
 <br />
 
-This is the end but thanks for taking the time to read. 
+This is the end but thanks for taking the time to read.
 The url to the web app is at [notes app link]
 
 <br />
