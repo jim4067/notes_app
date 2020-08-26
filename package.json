@@ -1,7 +1,7 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "the backend tutorial",
+  "description": "the back end of the notes app",
   "main": "index.js",
   "scripts": {
     "dev": "NODE_ENV=development nodemon index.js",
