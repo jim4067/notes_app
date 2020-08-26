@@ -18,7 +18,7 @@ It is from the [fullstackopen] course that is offered by the univesity of Helsin
 - The linter used for code consistency is eslint.(God this was a pain in the ass when your not consistent with your coding style).
 - The unit tests are performed using JEST (yay! Facebook) while end to end testing using Cypress.
 - The folowing dependancies also deserve a shoutout for making the dev process easier.
-    * [supertest] for wrapping around the entire express app and thus making testing using jest more <del>easier</del> manageble.
+    * [supertest] for wrapping around the entire express app and thus making testing using jest more <del>easier</del> :joy: manageble.
     * [express-async-erros] for eliminating the need to write the try-catch block each time when using async functions.
     * [cors] to allow *
     * [morgan] although I had my own request logger function I prefer morgan.
