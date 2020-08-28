@@ -14,13 +14,13 @@ const app = express();
 
 logger.info(`connecting to... ${config.MONGODB_URI}`);
 
-mongoose.connect(config.MONGODB_URI, {useUnifiedTopology:true, useNewUrlParser:true} )
-        .then( () => {
-            logger.info('connected to MongoDB')
-        })
-        .catch( (err) => {
-            logger.error("error connecting to mongoDB.....", err.message)
-        })
+mongoose.connect(config.MONGODB_URI, { useUnifiedTopology: true, useNewUrlParser: true })
+    .then(() => {
+        logger.info('connected to MongoDB')
+    })
+    .catch((err) => {
+        logger.error("error connecting to mongoDB.....", err.message)
+    })
 
 
 app.use(cors());
@@ -33,7 +33,7 @@ app.use('/api/login', login_router);
 app.use('/api/notes', note_router);
 app.use('/api/users', user_router);
 
-if(process.env.NODE_ENV === 'test') {
+if (process.env.NODE_ENV === 'test') {
     const testing_router = require('./controllers/testing');
     app.use('/api/testing', testing_router);
 }
