@@ -13,8 +13,7 @@
     "deploy": "git push heroku master",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && npm run deploy",
     "logs:prod": "heroku logs --tail",
-    "start:test": "cross-env NODE_ENV=test node index.js",
-    "server" : "json-server -p 3001 --watch db.json"
+    "start:test": "cross-env NODE_ENV=test node index.js"
   },
   "author": "jim_4067",
   "license": "ISC",
@@ -32,7 +31,6 @@
   "devDependencies": {
     "eslint": "^7.4.0",
     "jest": "^26.1.0",
-    "json-server": "^0.16.1",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.4",
     "supertest": "^4.0.2"
